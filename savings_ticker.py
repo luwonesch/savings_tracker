@@ -34,7 +34,7 @@ st.markdown(
         body, .stApp { background-color: #FFFFFF; color: #000000; }
         .big-font { font-size: 50px; font-weight: bold; color: #FFD700; text-align: center; }
         .metric-font { font-size: 30px; font-weight: bold; text-align: center; color: #000000; }
-        .info-icon { font-size: 16px; color: #555555; }
+        .info-icon { font-size: 16px; color: #555555; cursor: help; }
         .small-input input { width: 80px !important; text-align: center !important; font-size: 20px !important; background-color: #F0F0F0; color: #000000; border: 1px solid #BBBBBB; }
         .logo { display: flex; justify-content: center; }
         .button { display: flex; justify-content: center; margin-top: 20px; }
@@ -50,11 +50,25 @@ st.markdown("<div class='logo'><img src='https://www.granica.ai/logo.png' width=
 
 st.markdown("<div class='big-font'>Cloud Data Lake Overspending</div>", unsafe_allow_html=True)
 
+# Contextual Explanation
+st.markdown("**Why does this matter?** Data lakes often suffer from inefficiencies that lead to excessive storage and compute costs. Traditional data storage methods keep all raw data, requiring more compute power to process larger datasets. **Granica Crunch** leverages AI-accelerated compression to **condense data while preserving its full informational value**, significantly reducing both storage and compute expenses.")
+
+st.markdown("**How are we calculating this?**")
+st.markdown("""
+- **Storage Costs:** Assumed at $30/TB per month, with a **20% discount** applied, reducing it to $24/TB.
+- **Compute Costs:** Typically **4x storage costs**, reflecting the overhead of processing large volumes of raw data.
+- **Storage Waste Estimate:** Around **50% of stored data** consists of redundant or overly verbose structures that could be compressed.
+- **Compute Waste Estimate:** Processing uncompressed data requires **10% more compute resources** than necessary.
+
+By leveraging **Granica Crunch**, businesses can unlock massive cost reductions by minimizing redundant storage and reducing compute overhead.
+""")
+
 # Centered Small Input Field
 data_lake_size_pb = st.number_input(
-    "Enter your Data Lake Size (PB)", min_value=1, max_value=1000, value=10, step=1,
+    "Enter your Data Lake Size (PB) *",
+    min_value=1, max_value=1000, value=10, step=1,
     key="data_input", format="%d",
-    help="Enter the size of your data lake in petabytes (PB)."
+    help="Enter the size of your data lake in petabytes (PB). Example: 10 PB"
 )
 
 # Calculate button centered
@@ -64,14 +78,21 @@ if st.button("💡 See My Wasted Spend"):
     data = calculate_missed_savings(data_lake_size_pb)
     
     # Display Missed Savings with Hover Breakdown
-    st.markdown(f"<div class='big-font' title='Storage: ${data['Missed Storage Savings']:,.0f}\nCompute: ${data['Missed Compute Savings']:,.0f}'>Estimated Overspending:</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"""
+        <div class='big-font' title='Storage Waste: ${data['Missed Storage Savings']:,.0f}\nCompute Waste: ${data['Missed Compute Savings']:,.0f}'>
+        Estimated Overspending:
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.markdown("---")
     
-    # Show breakdown
-    st.markdown(f"<div class='metric-font'>⏳ Per Day: ${data['Missed Savings Per Day']:,.0f}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='metric-font'>📅 Per Week: ${data['Missed Savings Per Week']:,.0f}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='metric-font'>📆 Per Month: ${data['Missed Savings Per Month']:,.0f}</div>", unsafe_allow_html=True)
+    # Show breakdown with hover explanations
+    st.markdown(f"<div class='metric-font'>⏳ Per Day: ${data['Missed Savings Per Day']:,.0f} <span class='info-icon' title='Daily estimated waste based on inefficient storage and compute usage'>ℹ️</span></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='metric-font'>📅 Per Week: ${data['Missed Savings Per Week']:,.0f} <span class='info-icon' title='Weekly estimated waste, assuming 7-day operation'>ℹ️</span></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='metric-font'>📆 Per Month: ${data['Missed Savings Per Month']:,.0f} <span class='info-icon' title='Monthly estimated waste based on cloud inefficiencies'>ℹ️</span></div>", unsafe_allow_html=True)
     
     st.markdown("---")
     
