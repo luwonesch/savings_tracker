@@ -36,7 +36,6 @@ st.markdown(
         .metric-font { font-size: 30px; font-weight: bold; text-align: center; color: #000000; }
         .info-icon { font-size: 16px; color: #555555; cursor: help; }
         .small-input input { width: 80px !important; text-align: center !important; font-size: 20px !important; background-color: #F0F0F0; color: #000000; border: 1px solid #BBBBBB; }
-        .logo { display: flex; justify-content: center; }
         .button { display: flex; justify-content: center; margin-top: 20px; }
         .stButton>button { background-color: #D3D3D3; color: #000000; font-weight: bold; border-radius: 5px; padding: 10px; }
         .stButton>button:hover { background-color: #A9A9A9; }
@@ -45,23 +44,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Granica.ai logo
-st.markdown("<div class='logo'><img src='https://www.granica.ai/logo.png' width='200'></div>", unsafe_allow_html=True)
-
 st.markdown("<div class='big-font'>Cloud Data Lake Overspending</div>", unsafe_allow_html=True)
 
 # Contextual Explanation
 st.markdown("**Why does this matter?** Data lakes often suffer from inefficiencies that lead to excessive storage and compute costs. Traditional data storage methods keep all raw data, requiring more compute power to process larger datasets. **Granica Crunch** leverages AI-accelerated compression to **condense data while preserving its full informational value**, significantly reducing both storage and compute expenses.")
-
-st.markdown("**How are we calculating this?**")
-st.markdown("""
-- **Storage Costs:** Assumed at $30/TB per month, with a **20% discount** applied, reducing it to $24/TB.
-- **Compute Costs:** Typically **4x storage costs**, reflecting the overhead of processing large volumes of raw data.
-- **Storage Waste Estimate:** Around **50% of stored data** consists of redundant or overly verbose structures that could be compressed.
-- **Compute Waste Estimate:** Processing uncompressed data requires **10% more compute resources** than necessary.
-
-By leveraging **Granica Crunch**, businesses can unlock massive cost reductions by minimizing redundant storage and reducing compute overhead.
-""")
 
 # Centered Small Input Field
 data_lake_size_pb = st.number_input(
@@ -96,6 +82,16 @@ if st.button("💡 See My Wasted Spend"):
     
     st.markdown("---")
     
+    st.markdown("### **How are we calculating this?**")
+    st.markdown("""
+    - **Storage Costs:** Assumed at **$30/TB per month**, with a **20% discount**, reducing it to **$24/TB**.
+    - **Compute Costs:** Typically **4x storage costs**, reflecting the overhead of processing large volumes of raw data.
+    - **Storage Waste Estimate:** Around **50% of stored data** consists of redundant or overly verbose structures that could be compressed.
+    - **Compute Waste Estimate:** Processing uncompressed data requires **10% more compute resources** than necessary.
+    
+    By leveraging **Granica Crunch**, businesses can unlock massive cost reductions by minimizing redundant storage and reducing compute overhead.
+    """)
+
     st.markdown("### **Savings powered by Granica.ai**", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
