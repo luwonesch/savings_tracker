@@ -83,14 +83,17 @@ if st.button("💡 See My Wasted Spend"):
     st.markdown("---")
     
     st.markdown("### **How are we calculating this?**")
-    st.markdown("""
-    - **Storage Costs:** Assumed at **$30/TB per month**, with a **20% discount**, reducing it to **$24/TB**.
-    - **Compute Costs:** Typically **4x storage costs**, reflecting the overhead of processing large volumes of raw data.
-    - **Storage Waste Estimate:** Around **50% of stored data** consists of redundant or overly verbose structures that could be compressed.
-    - **Compute Waste Estimate:** Processing uncompressed data requires **10% more compute resources** than necessary.
-    
-    By leveraging **Granica Crunch**, businesses can unlock massive cost reductions by minimizing redundant storage and reducing compute overhead.
-    """)
+    st.markdown(
+        """
+        - **Storage Costs:** Assumed at **$30/TB per month**, with a **20% discount**, reducing it to **$24/TB**.
+        - **Compute Costs:** Typically **4× storage costs**, reflecting the overhead of processing large volumes of raw data.
+        - **Storage Waste Estimate:** Around **50% of stored data** consists of redundant or overly verbose structures that could be compressed.
+        - **Compute Waste Estimate:** Processing uncompressed data requires **10% more compute resources** than necessary.
+        
+        By leveraging **Granica Crunch**, businesses can unlock massive cost reductions by minimizing redundant storage and reducing compute overhead.
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.markdown("### **Savings powered by Granica.ai**", unsafe_allow_html=True)
 
